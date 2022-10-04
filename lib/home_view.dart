@@ -1,5 +1,6 @@
 import 'package:exos_lists_grids/detail_view.dart';
 import 'package:exos_lists_grids/model/data_source.dart';
+import 'package:exos_lists_grids/navigator_helper.dart';
 import 'package:flutter/material.dart';
 import 'model/place.dart';
 
@@ -38,7 +39,8 @@ class HomeViewState extends State<HomeView> {
         itemBuilder: (BuildContext context, int index) {
           final place = places[index];
           return ListTile(
-            onTap: () => pushDetailView(place: place),
+            onTap: () =>
+                NavigatorHelper().toDetail(context: context, place: place),
             leading: Text(index.toString()),
             title: Text(
               place.name,
@@ -68,7 +70,8 @@ class HomeViewState extends State<HomeView> {
         itemBuilder: (BuildContext context, int index) {
           final place = places[index];
           return InkWell(
-            onTap: () => pushDetailView(place: place),
+            onTap: () =>
+                NavigatorHelper().toDetail(context: context, place: place),
             child: Card(
               child: Column(
                 children: [
@@ -89,12 +92,5 @@ class HomeViewState extends State<HomeView> {
             ),
           );
         });
-  }
-
-  pushDetailView({required Place place}) {
-    final detailView = DetailView(place: place);
-    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext ctx) {
-      return detailView;
-    }));
   }
 }
